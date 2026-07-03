@@ -1,3 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Application Verification Portal</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color: white;
+  text-align: center;
+}
+
+.container {
+  max-width: 450px;
+  margin: 40px auto;
+  background: white;
+  color: black;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: gray;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 90%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+button {
+  width: 95%;
+  padding: 12px;
+  background: #1db954;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #17a44a;
+}
+
+.status {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #1db954;
+}
+
+.small {
+  font-size: 12px;
+  color: gray;
+  margin-top: 10px;
+}
+
+.links a {
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  background: #111;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <h2>Application Verification Portal</h2>
+  <p class="subtitle">
+    Submit your application for automated verification and eligibility review
+  </p>
+
+  <input id="name" placeholder="Full Name">
+  <input id="email" placeholder="Email Address">
+  <input id="country" placeholder="Country of Residence">
+
+  <button onclick="submitApplication()">Submit Application</button>
+
+  <p class="small">
+    All applications are processed through a secure verification system
+  </p>
+
+  <div class="status" id="status"></div>
+
+  <div class="links" id="links" style="display:none;">
+    <p>Contact Verification Department</p>
+
+    <a href="https://wa.me/18732804513" target="_blank">
+      WhatsApp Support Center
+    </a>
+
+    <a href="https://t.me/miacwr" target="_blank">
+      Telegram Support Desk
+    </a>
+
+    <a href="mailto:miacarterxoxo17@gmail.com">
+      Email Verification Unit
+    </a>
+  </div>
+
+</div>
+
 <script>
 function submitApplication() {
 
@@ -10,19 +134,24 @@ function submitApplication() {
     return;
   }
 
-  // STEP 1: show processing message
-  document.getElementById("token").innerText =
-    "Submitting application... please wait";
+  // Step 1: Processing state
+  document.getElementById("status").innerText =
+    "Submitting application for verification...";
 
-  // STEP 2: simulate review delay (premium feel)
+  // Step 2: Review simulation
   setTimeout(() => {
 
     let token = "APP-" + Math.random().toString(36).substring(2,8).toUpperCase();
 
-    document.getElementById("token").innerText =
-      "Application Reviewed ✔ " + name + " | Verification Token: " + token;
+    document.getElementById("status").innerText =
+      "Application Verified ✔ | Token: " + token;
 
-  }, 4000); // 4 second delay
+    document.getElementById("links").style.display = "block";
+
+  }, 3500);
 
 }
 </script>
+
+</body>
+</html>
