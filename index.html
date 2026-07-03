@@ -1,89 +1,161 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Official Giveaway Portal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Reward Portal</title>
+
   <style>
     body {
-      font-family: Arial;
-      background: linear-gradient(to right, #141e30, #243b55);
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      margin: 0;
+      padding: 20px;
       color: white;
       text-align: center;
-      padding: 50px;
     }
 
-    .box {
-      background: white;
-      color: black;
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 400px;
+    .container {
+      max-width: 450px;
       margin: auto;
+      background: #ffffff;
+      color: #000;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .badge {
+      display: inline-block;
+      background: gold;
+      color: black;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    h2 {
+      margin-bottom: 5px;
+    }
+
+    p.subtitle {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 92%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
     }
 
     button {
-      padding: 12px 20px;
-      background: green;
-      color: white;
+      width: 95%;
+      padding: 12px;
+      background: #1db954;
       border: none;
-      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      margin-top: 10px;
       cursor: pointer;
-      margin-top: 15px;
+      font-size: 15px;
     }
 
-    .token {
-      margin-top: 20px;
-      font-size: 22px;
+    button:hover {
+      background: #17a74a;
+    }
+
+    .token-box {
+      margin-top: 15px;
+      font-size: 16px;
       font-weight: bold;
-      color: green;
+      color: #1db954;
+    }
+
+    .section {
+      margin-top: 15px;
+      font-size: 12px;
+      color: #666;
     }
 
     .links a {
       display: block;
       margin-top: 10px;
       padding: 10px;
-      background: black;
+      background: #111;
       color: white;
       text-decoration: none;
-      border-radius: 6px;
+      border-radius: 8px;
+    }
+
+    .footer {
+      font-size: 11px;
+      color: #888;
+      margin-top: 15px;
     }
   </style>
 </head>
 
 <body>
 
-<div class="box">
-  <h2>🎉 Giveaway Portal</h2>
-  <p>Click below to generate your official token</p>
+<div class="container">
 
-  <button onclick="generateToken()">Generate Token</button>
+  <div class="badge">Verified Application Program</div>
 
-  <div class="token" id="token"></div>
+  <h2>Reward Application Portal</h2>
+  <p class="subtitle">Submit your application for evaluation and selection consideration</p>
+
+  <!-- FORM -->
+  <input type="text" id="name" placeholder="Full Legal Name">
+  <input type="email" id="email" placeholder="Email Address">
+  <input type="text" id="country" placeholder="Country of Residence">
+
+  <button onclick="submitApplication()">Submit Application</button>
+
+  <div class="section">
+    Applications are reviewed and assigned a unique verification token upon submission.
+  </div>
+
+  <div class="token-box" id="token"></div>
 
   <div class="links" id="links" style="display:none;">
-    <p>Send your token to claim reward 👇</p>
+    <p>Submit your Verification Token to Support:</p>
 
-    <!-- CHANGE THIS NUMBER -->
-    <a href="https://wa.me/+18732804513?text=My%20Giveaway%20Token%20is%20" target="_blank">
-      📲 WhatsApp
-    </a>
-
-    <!-- CHANGE THIS -->
-    <a href="https://t.me/miacwr" target="_blank">
-      ✈️ Telegram
-    </a>
-
-    <!-- CHANGE EMAIL -->
-    <a href="mailto:miacarterxoxo17@gmail.com">
-      📧 Email
-    </a>
+    <a href="https://wa.me/1234567890">WhatsApp Support Center</a>
+    <a href="https://t.me/yourusername">Telegram Support Desk</a>
+    <a href="mailto:you@gmail.com">Email Verification Team</a>
   </div>
+
+  <div class="footer">
+    © Application Reward System • Secure Processing Portal
+  </div>
+
 </div>
 
 <script>
-function generateToken() {
-  let token = "GW-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+function submitApplication() {
 
-  document.getElementById("token").innerText = "Your Token: " + token;
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let country = document.getElementById("country").value;
+
+  if(!name || !email || !country){
+    alert("Please complete all application fields");
+    return;
+  }
+
+  let token = "APP-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+
+  document.getElementById("token").innerText =
+    "Application Approved: " + name + " | Token: " + token;
+
   document.getElementById("links").style.display = "block";
 }
 </script>
