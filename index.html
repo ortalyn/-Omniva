@@ -1,1 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Official Giveaway Portal</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
 
+    .box {
+      background: white;
+      color: black;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    button {
+      padding: 12px 20px;
+      background: green;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .token {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      color: green;
+    }
+
+    .links a {
+      display: block;
+      margin-top: 10px;
+      padding: 10px;
+      background: black;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>🎉 Giveaway Portal</h2>
+  <p>Click below to generate your official token</p>
+
+  <button onclick="generateToken()">Generate Token</button>
+
+  <div class="token" id="token"></div>
+
+  <div class="links" id="links" style="display:none;">
+    <p>Send your token to claim reward 👇</p>
+
+    <!-- CHANGE THIS NUMBER -->
+    <a href="https://wa.me/+18732804513?text=My%20Giveaway%20Token%20is%20" target="_blank">
+      📲 WhatsApp
+    </a>
+
+    <!-- CHANGE THIS -->
+    <a href="https://t.me/miacwr" target="_blank">
+      ✈️ Telegram
+    </a>
+
+    <!-- CHANGE EMAIL -->
+    <a href="mailto:miacarterxoxo17@gmail.com">
+      📧 Email
+    </a>
+  </div>
+</div>
+
+<script>
+function generateToken() {
+  let token = "GW-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+
+  document.getElementById("token").innerText = "Your Token: " + token;
+  document.getElementById("links").style.display = "block";
+}
+</script>
+
+</body>
+</html>
