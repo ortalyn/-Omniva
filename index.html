@@ -3,45 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Application Verification Portal 2</title>
+<title>Application Verification Portal</title>
 
 <style>
 body {
-  font-family: Arial;
-  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   margin: 0;
-  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   color: white;
   text-align: center;
 }
 
 .container {
-  max-width: 450px;
+  max-width: 480px;
   margin: 40px auto;
   background: white;
   color: black;
   padding: 25px;
   border-radius: 14px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
 }
 
-h2 {
+h1 {
+  font-size: 22px;
   margin-bottom: 5px;
 }
 
-.subtitle {
+.sub {
   font-size: 13px;
   color: gray;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-input, textarea {
-  width: 90%;
-  padding: 10px;
-  margin: 6px 0;
+input, select, textarea {
+  width: 92%;
+  padding: 12px;
+  margin: 8px 0;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 14px;
+}
+
+textarea {
+  resize: none;
+  height: 80px;
 }
 
 button {
@@ -60,25 +65,26 @@ button:hover {
   background: #17a44a;
 }
 
-#status {
+.status {
   margin-top: 15px;
   font-weight: bold;
   color: #1db954;
 }
 
-#contact {
-  margin-top: 15px;
-  display: none;
+.small {
+  font-size: 12px;
+  color: gray;
+  margin-top: 10px;
 }
 
-#contact a {
+.links a {
   display: block;
   margin-top: 10px;
   padding: 10px;
   background: #111;
   color: white;
-  text-decoration: none;
   border-radius: 8px;
+  text-decoration: none;
 }
 </style>
 </head>
@@ -87,60 +93,81 @@ button:hover {
 
 <div class="container">
 
-  <h2>Application Verification Portal</h2>
-  <p class="subtitle">
+  <h1>Application Verification Portal</h1>
+  <p class="sub">
     Submit your application for eligibility review and verification processing
   </p>
 
-  <input id="name" placeholder="Full Legal Name">
-  <input id="email" placeholder="Email Address">
-  <input id="country" placeholder="Country of Residence">
+  <!-- FORM -->
+  <input id="name" type="text" placeholder="Full Legal Name">
+  <input id="email" type="email" placeholder="Email Address">
+  <input id="country" type="text" placeholder="Country of Residence">
 
-  <textarea id="reason" placeholder="Reason for Application"></textarea>
+  <select id="age">
+    <option value="">Select Age Range</option>
+    <option>18–24</option>
+    <option>25–34</option>
+    <option>35–44</option>
+    <option>45+</option>
+  </select>
 
-  <button onclick="submitApplication()">Submit Application</button>
+  <textarea id="reason" placeholder="Why are you applying for this program?"></textarea>
 
-  <p id="status"></p>
+  <button onclick="submitForm()">Submit Application</button>
 
-  <div id="contact">
-    <h3>Contact Verification Department</h3>
+  <p class="small">
+    All submissions are processed through a secure verification system.
+  </p>
 
-    <a href="https://wa.me/18732804513" target="_blank">WhatsApp Support</a>
-    <a href="https://t.me/miacwr" target="_blank">Telegram Support</a>
-    <a href="mailto:miacarterxoxo17@gmail.com">Email Support</a>
+  <div class="status" id="status"></div>
+
+  <div class="links" id="links" style="display:none;">
+    <p>Verification Support Center</p>
+
+    <a href="https://wa.me/18732804513" target="_blank">
+      WhatsApp Support
+    </a>
+
+    <a href="https://t.me/miacwr" target="_blank">
+      Telegram Support
+    </a>
+
+    <a href="mailto:miacarterxoxo17@gmail.com">
+      Email Verification Unit
+    </a>
   </div>
 
 </div>
 
 <script>
-function submitApplication() {
+function submitForm() {
 
   let name = document.getElementById("name").value;
   let email = document.getElementById("email").value;
   let country = document.getElementById("country").value;
+  let age = document.getElementById("age").value;
   let reason = document.getElementById("reason").value;
 
-  if(!name || !email || !country || !reason){
-    alert("Please complete all fields");
+  if(!name || !email || !country || !age || !reason){
+    alert("Please complete all required fields");
     return;
   }
 
+  // STEP 1: processing
   document.getElementById("status").innerText =
     "Submitting application for verification...";
 
-  document.getElementById("contact").style.display = "none";
-
+  // STEP 2: simulate review delay
   setTimeout(() => {
 
-    let refId = "APP-" + Math.random().toString(36).substring(2,8).toUpperCase();
+    let token = "APP-" + Math.random().toString(36).substring(2,8).toUpperCase();
 
     document.getElementById("status").innerText =
-      "Application Verified ✔ Reference ID: " + refId;
+      "Application Verified ✔ | Reference ID: " + token;
 
-    document.getElementById("contact").style.display = "block";
+    document.getElementById("links").style.display = "block";
 
-  }, 3000);
-
+  }, 3500);
 }
 </script>
 
