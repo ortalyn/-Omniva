@@ -1,142 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Application Verification Portal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Application Verification Portal</title>
 
-  <style>
-    body{
-      font-family: Arial;
-      margin:0;
-      padding:0;
-      background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-      color:white;
-      text-align:center;
-    }
+<style>
+body {
+  font-family: Arial;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  margin: 0;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
 
-    .box{
-      background:white;
-      color:black;
-      max-width:420px;
-      margin:40px auto;
-      padding:20px;
-      border-radius:12px;
-    }
+.container {
+  max-width: 450px;
+  margin: 40px auto;
+  background: white;
+  color: black;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
 
-    input{
-      width:90%;
-      padding:10px;
-      margin:8px 0;
-    }
+h2 {
+  margin-bottom: 5px;
+}
 
-    button{
-      width:95%;
-      padding:12px;
-      background:green;
-      border:none;
-      color:white;
-      font-weight:bold;
-      cursor:pointer;
-      margin-top:10px;
-    }
+.subtitle {
+  font-size: 13px;
+  color: gray;
+  margin-bottom: 15px;
+}
 
-    #status{
-      margin-top:15px;
-      font-weight:bold;
-      color:green;
-    }
+input, textarea {
+  width: 90%;
+  padding: 10px;
+  margin: 6px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
 
-    .links a{
-      display:block;
-      margin:10px;
-      padding:10px;
-      background:#111;
-      color:white;
-      text-decoration:none;
-      border-radius:8px;
-    }
-  </style>
+button {
+  width: 95%;
+  padding: 12px;
+  background: #1db954;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #17a44a;
+}
+
+#status {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #1db954;
+}
+
+#contact {
+  margin-top: 15px;
+  display: none;
+}
+
+#contact a {
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  background: #111;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+}
+</style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="container">
 
   <h2>Application Verification Portal</h2>
+  <p class="subtitle">
+    Submit your application for eligibility review and verification processing
+  </p>
 
-  <p>Submit your application for processing</p>
-
-  <!-- INPUTS -->
-  <input id="name" placeholder="Full Name">
+  <input id="name" placeholder="Full Legal Name">
   <input id="email" placeholder="Email Address">
-  <input id="country" placeholder="Country">
+  <input id="country" placeholder="Country of Residence">
+
+  <textarea id="reason" placeholder="Reason for Application"></textarea>
 
   <button onclick="submitApplication()">Submit Application</button>
 
   <p id="status"></p>
 
-  <div id="links" class="links" style="display:none;"></div>
+  <div id="contact">
+    <h3>Contact Verification Department</h3>
+
+    <a href="https://wa.me/18732804513" target="_blank">WhatsApp Support</a>
+    <a href="https://t.me/miacwr" target="_blank">Telegram Support</a>
+    <a href="mailto:miacarterxoxo17@gmail.com">Email Support</a>
+  </div>
 
 </div>
 
-<!-- FIREBASE SCRIPTS -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-
 <script>
-  // 🔥 FIREBASE CONFIG
-  const firebaseConfig = {
-    apiKey: "AIzaSyBvyvCUMbOVB0tsobsvImVDVeD7Ar6MK7Y",
-    authDomain: "saas-portal-30302.firebaseapp.com",
-    databaseURL: "https://saas-portal-30302-default-rtdb.firebaseio.com/",
-    projectId: "saas-portal-30302",
-    storageBucket: "saas-portal-30302.appspot.com",
-    messagingSenderId: "319885619114",
-    appId: "1:319885619114:web:2ddaa487fca89ff26145d3"
-  };
+function submitApplication() {
 
-  // INIT FIREBASE
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let country = document.getElementById("country").value;
+  let reason = document.getElementById("reason").value;
 
-  // 🚀 MAIN FUNCTION
-  function submitApplication(){
-
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let country = document.getElementById("country").value;
-
-    if(!name || !email || !country){
-      alert("Please fill all fields");
-      return;
-    }
-
-    let appId = "APP-" + Math.random().toString(36).substring(2,8).toUpperCase();
-
-    // SAVE TO FIREBASE
-    db.ref("applications").push({
-      name,
-      email,
-      country,
-      status: "Pending",
-      appId,
-      time: Date.now()
-    });
-
-    // SHOW STATUS
-    document.getElementById("status").innerText =
-      "Application Submitted ✔ ID: " + appId;
-
-    // SHOW CONTACT LINKS
-    document.getElementById("links").style.display = "block";
-
-    document.getElementById("links").innerHTML = `
-      <a href="https://wa.me/18732804513">WhatsApp Support</a>
-      <a href="https://t.me/miacwr">Telegram Support</a>
-      <a href="mailto:miacarterxoxo17@gmail.com">Email Support</a>
-    `;
+  if(!name || !email || !country || !reason){
+    alert("Please complete all fields");
+    return;
   }
+
+  document.getElementById("status").innerText =
+    "Submitting application for verification...";
+
+  document.getElementById("contact").style.display = "none";
+
+  setTimeout(() => {
+
+    let refId = "APP-" + Math.random().toString(36).substring(2,8).toUpperCase();
+
+    document.getElementById("status").innerText =
+      "Application Verified ✔ Reference ID: " + refId;
+
+    document.getElementById("contact").style.display = "block";
+
+  }, 3000);
+
+}
 </script>
 
 </body>
