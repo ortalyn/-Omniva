@@ -1,8 +1,8 @@
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
 <script>
-  // Firebase Configuration (YOUR PROJECT)
+  // 🔥 FIREBASE CONFIG
   const firebaseConfig = {
     apiKey: "AIzaSyBvyvCUMbOVB0tsobsvImVDVeD7Ar6MK7Y",
     authDomain: "saas-portal-30302.firebaseapp.com",
@@ -13,43 +13,58 @@
     appId: "1:319885619114:web:2ddaa487fca89ff26145d3"
   };
 
-  // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  // SUBMIT APPLICATION FUNCTION
+  // 🚀 SUBMIT APPLICATION FUNCTION
   function submitApplication() {
 
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
     let country = document.getElementById("country").value;
 
+    // ❌ Validation (compulsory fields)
     if (!name || !email || !country) {
-      alert("Please complete all fields");
+      alert("Please complete all required fields");
       return;
     }
 
-    // Generate Application ID
+    // 🎯 Generate Application Token
     let appId = "APP-" + Math.random().toString(36).substring(2, 8).toUpperCase();
 
-    // Save to Firebase
+    // 💾 Save to Firebase database
     db.ref("applications").push({
       name: name,
       email: email,
       country: country,
-      status: "Pending",
+      status: "Pending Review",
       appId: appId,
       time: new Date().toISOString()
     });
 
-    // Show result on screen
-    document.getElementById("status").innerText =
-      "Application Submitted ✔ ID: " + appId;
+    // 📢 Show success message
+    document.getElementById("status").innerHTML =
+      "✔ Application Submitted Successfully<br>" +
+      "Your Verification ID: <b>" + appId + "</b>";
 
-    // Show admin/support section (if you have it)
-    let links = document.getElementById("links");
-    if (links) {
-      links.style.display = "block";
-    }
+    // 🔓 Show contact section
+    document.getElementById("links").style.display = "block";
+
+    // 📞 Fill Contact Section Dynamically
+    document.getElementById("links").innerHTML = `
+      <p><b>Verification Support Center</b></p>
+
+      <a href="https://wa.me/18732804513" target="_blank">
+        WhatsApp Support Line
+      </a>
+
+      <a href="https://t.me/miacwr" target="_blank">
+        Telegram Verification Desk
+      </a>
+
+      <a href="mailto:miacarterxoxo17@gmail.com">
+        Email Verification Unit
+      </a>
+    `;
   }
 </script>
